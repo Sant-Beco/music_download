@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#06090f">
+  <title>YTDrop — Descargador</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="logo">YD</div>
+    <div>
+      <h1>YT<span>Drop</span></h1>
+      <p class="topbar-sub">Descarga música y video desde YouTube y más</p>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <!-- Tarjetas de redes soportadas -->
+    <div class="platforms">
+      <div class="platform-chip">▶ YouTube</div>
+      <div class="platform-chip">♪ SoundCloud</div>
+      <div class="platform-chip">✦ TikTok</div>
+      <div class="platform-chip">◈ Instagram</div>
+      <div class="platform-chip">𝕏 Twitter / X</div>
+      <div class="platform-chip">↯ Vimeo</div>
+    </div>
+
+    <!-- Formulario principal -->
+    <div class="card main-card">
+      <div class="input-row">
+        <input
+          type="url"
+          id="urlInput"
+          class="url-input"
+          placeholder="Pega aquí el enlace de YouTube, TikTok, Instagram…"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button class="btn-paste" onclick="pasteFromClipboard()" title="Pegar">⎘</button>
+      </div>
+
+      <!-- Opciones de formato -->
+      <div class="options-row">
+        <div class="opt-group">
+          <label class="opt-label">Formato</label>
+          <div class="toggle-group" id="modeToggle">
+            <button class="toggle-btn active" data-mode="audio" onclick="setMode('audio', this)">
+              🎵 MP3 Audio
+            </button>
+            <button class="toggle-btn" data-mode="video" onclick="setMode('video', this)">
+              🎬 MP4 Video
+            </button>
+          </div>
+        </div>
+
+        <!-- Calidad de audio (visible en modo audio) -->
+        <div class="opt-group" id="audioOpts">
+          <label class="opt-label">Calidad de audio</label>
+          <select class="opt-select" id="audioQuality">
+            <option value="320">320 kbps (máxima)</option>
+            <option value="256">256 kbps</option>
+            <option value="128" selected>128 kbps</option>
+          </select>
+        </div>
+
+        <!-- Calidad de video (visible en modo video) -->
+        <div class="opt-group hidden" id="videoOpts">
+          <label class="opt-label">Calidad de video</label>
+          <select class="opt-select" id="videoQuality">
+            <option value="1080">1080p</option>
+            <option value="720" selected>720p</option>
+            <option value="480">480p</option>
+            <option value="360">360p</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-download" id="btnDownload" onclick="startDownload()">
+        ↓ &nbsp;Descargar
+      </button>
+    </div>
+
+    <!-- Estado / resultado -->
+    <div class="status-area" id="statusArea" style="display:none;">
+
+      <!-- Loading -->
+      <div class="status-card" id="statusLoading" style="display:none;">
+        <div class="spinner"></div>
+        <div>
+          <div class="status-title" id="loadingText">Obteniendo información…</div>
+          <div class="status-sub">Procesando enlace</div>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="status-card status-error" id="statusError" style="display:none;">
+        <span class="status-icon">✕</span>
+        <div>
+          <div class="status-title">No se pudo procesar el enlace</div>
+          <div class="status-sub" id="errorText"></div>
+        </div>
+      </div>
+
+      <!-- Resultado listo -->
+      <div class="result-card" id="resultCard" style="display:none;">
+        <img id="resultThumb" class="result-thumb" src="" alt="">
+        <div class="result-info">
+          <div class="result-title" id="resultTitle"></div>
+          <div class="result-meta" id="resultMeta"></div>
+          <a class="btn-dl-ready" id="dlLink" href="#" target="_blank" rel="noopener">
+            ↓ &nbsp;Descargar archivo
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Aviso legal -->
+    <p class="disclaimer">
+      Solo para uso personal. Respeta los derechos de autor y los términos de servicio de cada plataforma.
+      Descarga procesada por <a href="https://cobalt.tools" target="_blank" rel="noopener">cobalt.tools</a>.
+    </p>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

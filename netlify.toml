@@ -1,0 +1,12 @@
+# netlify.toml
+# Configuración del proyecto para Netlify
+
+[build]
+  publish = "."                        # carpeta raíz con index.html
+  functions = "netlify/functions"      # carpeta de funciones serverless
+
+# Redirigir /api/download → la función serverless
+[[redirects]]
+  from   = "/api/download"
+  to     = "/.netlify/functions/download"
+  status = 200
